@@ -8,14 +8,14 @@ import Header from './Components/Header/Header';
 
 
 
-class App extends Component() {
+class App extends Component {
   constructor(){
-    super(
+    super()
       this.state = {
         inventory: []
       }
       
-    )
+    
   }
   render(){
     return (
