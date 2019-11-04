@@ -28,7 +28,7 @@ class Form extends Component {
                     <br></br>
                     <input className="input-2" type="text" value={this.state.price} onChange={this.handleChange} placeholder="Price"/>
                     <br></br>
-                    <input className="input-3" type="text" value={this.state.img} onChange={this.handleChange} placeholder="Image"/>
+                    <input className="input-3" type="text" value={this.state.img} onChange={this.handleChange} placeholder="image"/>
                     <br></br>
                     <br></br>
 
