@@ -6,7 +6,7 @@ class Form extends Component {
             this.state = {
                 product_name: '',
                 price: '',
-                img: ''
+                img: 'https://timedotcom.files.wordpress.com/2018/11/sweetfoam-sustainable-product.jpg?quality=85'
             }
         // this.handleSubmit = this.handleSubmit.bind(this)
         this.handleName= this.handleName.bind(this)
@@ -36,11 +36,13 @@ class Form extends Component {
         return (
             <div>
                 <form>
-                    <input className="input-1" type="text"  onChange={this.handleChange} placeholder="Product Name"/>
+                    <img src={this.state.img} height="150px" alt=""/>
                     <br></br>
-                    <input className="input-2" type="text"  onChange={this.handleChange} placeholder="Price"/>
+                    <input className="input-3" type="text"  size="35" onChange={this.handleChange} placeholder="imageURL"/>
                     <br></br>
-                    <input className="input-3" type="text"  onChange={this.handleChange} placeholder="image"/>
+                    <input className="input-1" type="text"  size="35" onChange={this.handleChange} placeholder="Product Name"/>
+                    <br></br>
+                    <input className="input-2" type="text"  size="35" onChange={this.handleChange} placeholder="Price"/>
                     <br></br>
                     <br></br>
 
