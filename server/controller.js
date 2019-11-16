@@ -9,4 +9,20 @@ module.exports = {
             console.log(err)
         })
     },
+    addInventory(req, res) {
+        const db = req.app.get('db')
+        const {product_name, price, img} = req.body
+        console.log(req.body)
+        db.add_inventory({
+            product_name: product_name,
+            price: price,
+            img: img,
+        })
+        .then(result => {
+            res.status(200).send(result)
+        })
+        .catch(err => {
+            console.log(err)
+        }) 
+    },
 }
