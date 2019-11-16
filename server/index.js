@@ -8,7 +8,8 @@ const app = express()
 
 app.use(express.json())
 
-app.get('/api/App', ctrl.getInventory)
+app.get('/api/Dashboard', ctrl.getInventory)
+app.post('/api/Dashboard', ctrl.addInventory)
 
 massive(CONNECTION_STRING).then(databaseConnection => {
     app.set('db', databaseConnection)
