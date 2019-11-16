@@ -8,6 +8,8 @@ const app = express()
 
 app.use(express.json())
 
+app.get('/api/App', ctrl.getInventory)
+
 massive(CONNECTION_STRING).then(databaseConnection => {
     app.set('db', databaseConnection)
     console.log('database connected')
