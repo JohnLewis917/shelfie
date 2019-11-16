@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 class Form extends Component {
     constructor(props) {
         super(props)
+
             this.state = {
                 product_name: '',
                 price: '',
@@ -26,16 +27,19 @@ class Form extends Component {
         this.setState({img: event.target.img})
     }
     buttonClick() {
+        
         this.setState ={
         product_name: '',
-        price: '',
+        price: 0,
         img: ''
         }
+        
     }
     render() {
+        
         return (
             <div>
-                <form>
+                <form id="form1">
                     <img src={this.state.img} height="150px" alt=""/>
                     <br></br>
                     <input className="input-3" type="text"  size="35" onChange={this.handleChange} placeholder="imageURL"/>
@@ -47,7 +51,7 @@ class Form extends Component {
                     <br></br>
 
                     <button className="button-1" type="reset" onClick={() => this.buttonClick()}>Cancel</button>
-                    <button className="button-2" type="submit">Add to Inventory</button>
+                    <button className="button-2" type="submit" form="form1">Add to Inventory</button>
                 </form>
                 
             </div> 
