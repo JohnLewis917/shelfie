@@ -6,28 +6,44 @@ import {withRouter} from 'react-router-dom'
 class Form extends Component {
     constructor(props) {
         super(props)
+        const{id} = this.props.match.params
 
             this.state = {
                 product_name: '',
                 price: '',
-                img: 'https://timedotcom.files.wordpress.com/2018/11/sweetfoam-sustainable-product.jpg?quality=85'
+                img: 'https://timedotcom.files.wordpress.com/2018/11/sweetfoam-sustainable-product.jpg?quality=85',
+                isEditing: id ? true : false
             }
         
         this.handleName= this.handleName.bind(this)
         this.handlePrice= this.handlePrice.bind(this)
         this.handleImg= this.handleImg.bind(this)
         this.addInventory=this.addInventory.bind(this)
-        
+        this.handleSubmit=this.handleSubmit.bind(this)
+        this.updateProduct=this.updateProduct.bind(this)
         
     }
     componentDidMount(){
-        const {product_name, price, img} = this.props.currentObj
-        this.setState({
-            product_name: product_name,
-            price: price,
-            img: img
-        })
+        const{id} = this.props.match.params
+        if (id){
+
+            axios.get(`/api/Dashboard/${id}`)
+            .then(res => {
+                console.log(res.data)
+                const [product] = res.data
+                this.setState({
+                    product_name: product.product_name,
+                    price: product.price,
+                    img: product.img,
+                    id: id
+                })
+                // console.log(res.data)
+                
+            })
+        }
+         
     }
+    
     handleName(event){
         this.setState({product_name: event.target.value})
         
@@ -41,23 +57,35 @@ class Form extends Component {
     buttonClick() {
         this.setState ({
         product_name: '',
-        price: 0,
+        price: '',
         img: 'https://timedotcom.files.wordpress.com/2018/11/sweetfoam-sustainable-product.jpg?quality=85'
         })
         
     }
-    
     addInventory(){
         axios.post('/api/Dashboard', this.state)
         .then(res => {
         this.props.history.push('/')
         })
     }
+    updateProduct(){
+        axios.put(`/api/Dashboard/${this.state.id}`, this.state)
+        .then(res => {
+        this.props.history.push('/')
+        })
+    }
+    handleSubmit(){
+        if (this.state.isEditing){
+            this.updateProduct()
+        }else {
+            this.addInventory()
+        }
+    }
     render() {
         
         return (
             <div>
-                <form onSubmit={this.addInventory}>
+                <form onSubmit={this.handleSubmit}>
                     <img src={this.state.img} height="150px" alt=""/>
                     <br></br>
                     <input className="input-3" type="text"  value={this.state.img} size="35" onChange={this.handleImg} placeholder="imageURL"/>
@@ -69,7 +97,7 @@ class Form extends Component {
                     <br></br>
 
                     <button className="button-1" type="reset" onClick={() => this.buttonClick()}>Cancel</button>
-                    <button className="button-2" type="submit">Add to Inventory</button>
+                    <button className="button-2" type="submit">{this.state.isEditing ? 'Save Changes': 'Add to Inventory'}</button>
                     
                 </form>
                 
