@@ -33,9 +33,11 @@ module.exports = {
         })
     },
     updateProduct(req, res){
+        console.log(req.body, req.params)
         const db = req.app.get('db')
-        const {params, query} = req;
-        db.update_product([params.id, query.desc])
+        const {product_name, price, img} = req.body
+        const {id} = req.params
+        db.update_product([product_name, +price, img, +id])
         .then(result => {
             res.status(200).send(result)
         })
