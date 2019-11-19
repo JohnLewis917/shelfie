@@ -8,11 +8,7 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       inventory: [],
-      currentlySelected: {
-        product_name: "",
-        price: 0,
-        img: ""
-      }
+      
     }
   }
 
@@ -22,11 +18,11 @@ class Dashboard extends Component {
   getInventory(){
     axios.get('/api/Dashboard')
     .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.setState({
             inventory: res.data
         })
-        console.log(res.data)
+        // console.log(res.data)
         
     })
  }
@@ -41,10 +37,10 @@ class Dashboard extends Component {
     return (
       <div>
         {this.state.inventory.map(el => (
-          <Product key={el.id} inventoryObj={el} deleteFn={this.deleteProduct}/>
+          <Product key={el.id} id={el.id} inventoryObj={el} deleteFn={this.deleteProduct}/>
         ))}
         
-          <Form key = {this.state.currentlySelected.id} currentObj={this.state.currentlySelected} />
+          {/* <Form/> */}
 
         
         
