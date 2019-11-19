@@ -7,9 +7,15 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inventory: []
-    };
+      inventory: [],
+      currentlySelected: {
+        product_name: "",
+        price: 0,
+        img: ""
+      }
+    }
   }
+
   componentDidMount(){
     this.getInventory()
   }
@@ -24,15 +30,23 @@ class Dashboard extends Component {
         
     })
  }
+ deleteProduct = (id) => {
+    axios.delete(`/api/Dashboard/${id}`)
+    .then(() => {
+      this.getInventory()
+    })
+ }
 
   render() {
     return (
       <div>
         {this.state.inventory.map(el => (
-          <Product key={el.id} inventoryObj={el} />
+          <Product key={el.id} inventoryObj={el} deleteFn={this.deleteProduct}/>
         ))}
         
-        <Form/>
+          <Form key = {this.state.currentlySelected.id} currentObj={this.state.currentlySelected} />
+
+        
         
       </div>
     );
