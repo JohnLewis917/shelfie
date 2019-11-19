@@ -41,4 +41,13 @@ module.exports = {
         })
         
     },
+    getProduct(req, res){
+        const db = req.app.get('db')
+        const {params, query} = req;
+        db.get_product([params.id])
+        .then(result => {
+            res.status(200).send(result)
+        })
+        
+    },
 }
