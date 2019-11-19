@@ -10,9 +10,11 @@ app.use(express.json())
 
 app.get('/api/Dashboard', ctrl.getInventory)
 app.post('/api/Dashboard', ctrl.addInventory)
+app.delete('/api/Dashboard/:id', ctrl.deleteProduct)
+app.put('/api/Dashboard/:id', ctrl.updateProduct)
 
 massive(CONNECTION_STRING).then(databaseConnection => {
     app.set('db', databaseConnection)
     console.log('database connected')
-}),
-app.listen(SERVER_PORT, () => console.log(`${SERVER_PORT} dollars in ma pocket`))
+    app.listen(SERVER_PORT, () => console.log(`${SERVER_PORT} dollars in ma pocket`))
+})
