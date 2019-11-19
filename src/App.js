@@ -19,6 +19,7 @@ class App extends Component {
         <Switch>
             <Route exact path='/' component={Dashboard}/>
             <Route path='/Form' component={Form}/>
+            <Route path='/Edit/:id' component={Form}/>
          </Switch>
         
       </div>
