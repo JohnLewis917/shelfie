@@ -69,6 +69,7 @@ class Form extends Component {
         })
     }
     updateProduct(){
+        console.log(this.state.id, this.state)
         axios.put(`/api/Dashboard/${this.state.id}`, this.state)
         .then(res => {
         this.props.history.push('/')
